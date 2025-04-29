@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import MasterLayout from "./components/masterLayout/MasterLayout";
+import MasterLayout from "./components/MasterLayout/MasterLayout";
 
 function App() {
   return (
