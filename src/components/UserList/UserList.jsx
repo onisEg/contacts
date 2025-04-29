@@ -74,7 +74,16 @@ export default function UserList() {
         picture: "",
       });
     } catch (error) {
-      toast.error(error.message);
+      if (error.response?.data?.data) {
+        const errors = error.response.data.data;
+        const message = Object.entries(errors)
+          .map(([key, value]) => `${key}: ${value}`)
+          .join("\n");
+
+        toast.error(message);
+      } else {
+        toast.error(error.message);
+      }
     }
   };
 
@@ -110,7 +119,14 @@ export default function UserList() {
     <>
       <div className="addBtn d-flex justify-content-end pt-4 px-4 ">
         <button
-          className="btn btn-info btn-lg rounded-pill text-white fw-lighter"
+          className="btn d-flex align-items-center gap-2 px-4 py-2 rounded-pill border-0 shadow-sm"
+          style={{
+            backgroundColor: "#1BB0F0",
+            color: "#fff",
+            fontWeight: 500,
+            fontSize: "16px",
+            transition: "all 0.3s",
+          }}
           onClick={() => {
             setNewContact({
               firstName: "",
@@ -118,9 +134,15 @@ export default function UserList() {
               email: "",
               picture: "",
             });
-            setEditMode(false); // مهم جدا
+            setEditMode(false);
             setShowModal(true);
           }}
+          onMouseOver={(e) =>
+            (e.currentTarget.style.backgroundColor = "#139ecf")
+          }
+          onMouseOut={(e) =>
+            (e.currentTarget.style.backgroundColor = "#1BB0F0")
+          }
         >
           <i className="fa-solid fa-plus mx-1"></i> Add New Contact
         </button>
@@ -156,13 +178,15 @@ export default function UserList() {
               </div>
               <div className="d-flex gap-2 ">
                 <button
-                  className="btn btn-outline-warning text-warning bg-light"
+                  className="btn bg-white border-0 shadow-sm rounded-circle d-flex align-items-center justify-content-center text-warning"
+                  style={{ width: "45px", height: "45px" }}
                   onClick={() => handleEdit(contact)}
                 >
                   <i className="bi bi-pencil "></i>
                 </button>
                 <button
-                  className="btn btn-outline-danger text-denger bg-light"
+                  className="btn bg-white border-0 shadow-sm rounded-circle d-flex align-items-center justify-content-center text-danger"
+                  style={{ width: "45px", height: "45px" }}
                   onClick={() => handleDelete(contact.id)}
                 >
                   <i className="bi bi-trash"></i>
@@ -181,8 +205,12 @@ export default function UserList() {
           className="modal d-block"
           tabIndex="-1"
           style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+          onClick={() => setShowModal(false)}
         >
-          <div className="modal-dialog modal-dialog-centered modal-xl">
+          <div
+            className="modal-dialog modal-dialog-centered modal-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="modal-content">
               <div className="modal-body text-center p-5">
                 {/* Upload Image Section */}
