@@ -272,11 +272,14 @@ export default function UserList() {
                     Cancel
                   </button>
                   <button
-                    style={{ background: "#1BB0F0" }}
+                    style={{
+                      background: editMode ? "#FFC107" : "#1BB0F0", // أصفر لو تعديل، أزرق لو إضافة
+                      border: "none",
+                    }}
                     className="btn btn-primary rounded-4 px-5 fs-6 btn-lg fw-light"
                     onClick={handleSave}
                   >
-                    Save
+                    {editMode ? "Update" : "Save"}
                   </button>
                 </div>
               </div>
