@@ -30,12 +30,14 @@ export default function UserList() {
 
   const fetchContacts = async () => {
     try {
-      const response = await axios.get(`${baseURL}?limit=4`, {
+      const response = await axios.get(`${baseURL}`, {
         headers: {
           "app-id": appId,
         },
       });
       setContacts(response.data.data);
+      console.log(response.data.data);
+
       toast.success("Updated");
     } catch (error) {
       toast.error(error.message);
@@ -109,7 +111,16 @@ export default function UserList() {
       <div className="addBtn d-flex justify-content-end pt-4 px-4 ">
         <button
           className="btn btn-info btn-lg rounded-pill text-white fw-lighter"
-          onClick={() => setShowModal(true)}
+          onClick={() => {
+            setNewContact({
+              firstName: "",
+              lastName: "",
+              email: "",
+              picture: "",
+            });
+            setEditMode(false); // مهم جدا
+            setShowModal(true);
+          }}
         >
           <i className="fa-solid fa-plus mx-1"></i> Add New Contact
         </button>
