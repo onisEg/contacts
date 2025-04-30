@@ -18,6 +18,13 @@ export default function UserList() {
   });
   const [editMode, setEditMode] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredContacts = contacts.filter((contact) =>
+    `${contact.firstName} ${contact.lastName}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
 
   const handleEdit = (contact) => {
     setNewContact({
@@ -120,6 +127,17 @@ export default function UserList() {
   }, []);
   return (
     <>
+      <div className="input-group input-group-lg px-4 pt-4">
+        <input
+          type="text"
+          className="form-control rounded-pill"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-lg"
+          placeholder="Search by Name"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       <AddContactButton
         onClick={() => {
           setNewContact({
@@ -137,7 +155,7 @@ export default function UserList() {
         className=" p-4 w-100  custom-scroll"
         style={{ maxHeight: "70vh", overflowY: "auto" }}
       >
-        {contacts.map((contact, index) => (
+        {filteredContacts.map((contact, index) => (
           <div key={contact.id} className="mb-1">
             <ContactCard
               contact={contact}
