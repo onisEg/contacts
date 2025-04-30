@@ -147,7 +147,10 @@ export default function UserList() {
           <i className="fa-solid fa-plus mx-1"></i> Add New Contact
         </button>
       </div>
-      <div className=" p-4 w-100">
+      <div
+        className=" p-4 w-100  custom-scroll"
+        style={{ maxHeight: "70vh", overflowY: "auto" }}
+      >
         {contacts.map((contact, index) => (
           <div key={contact.id} className=" mb-1">
             <div className="d-flex align-items-center w-100 ">
@@ -212,7 +215,13 @@ export default function UserList() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-content">
-              <div className="modal-body text-center p-5">
+              <form
+                className="modal-body text-center p-5"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSave();
+                }}
+              >
                 {/* Upload Image Section */}
                 <div>
                   <input
@@ -304,6 +313,7 @@ export default function UserList() {
 
                 <div className="d-flex justify-content-between">
                   <button
+                    type="button"
                     style={{ background: "#d9d9d9" }}
                     className="btn  rounded-4 px-4 fs-6 btn-xl fw-light text-dark  "
                     onClick={() => setShowModal(false)}
@@ -311,6 +321,7 @@ export default function UserList() {
                     Cancel
                   </button>
                   <button
+                    type="submit"
                     style={{
                       background: editMode ? "#FFC107" : "#1BB0F0", // أصفر لو تعديل، أزرق لو إضافة
                       border: "none",
@@ -321,7 +332,7 @@ export default function UserList() {
                     {editMode ? "Update" : "Save"}
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
