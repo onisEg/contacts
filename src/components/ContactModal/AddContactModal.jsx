@@ -9,7 +9,7 @@ export default function AddContactModal({
 }) {
   return (
     <div
-      className="modal d-block"
+      className="modal d-block rounded-4"
       tabIndex="-1"
       style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
       onClick={() => setShowModal(false)}

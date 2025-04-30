@@ -127,7 +127,7 @@ export default function UserList() {
   }, []);
   return (
     <>
-      <div className="input-group input-group-lg px-4 ">
+      <div className="input-group input-group-lg px-4 pt-4">
         <input
           type="text"
           className="form-control rounded-pill"
@@ -138,6 +138,8 @@ export default function UserList() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
+
+      {/* add contact btn  */}
       <AddContactButton
         onClick={() => {
           setNewContact({
