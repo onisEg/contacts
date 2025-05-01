@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+
 import AddContactModal from "../ContactModal/AddContactModal";
 import ContactCard from "../ContactCard/ContactCard";
 import AddContactButton from "../AddContactButton/AddContactButton";
+import toast from "react-hot-toast";
 const baseURL = `https://dummyapi.io/data/v1/user`;
 const appId = "64fc4a747b1786417e354f31";
 

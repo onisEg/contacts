@@ -1,14 +1,13 @@
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from "react-hot-toast";
 import MasterLayout from "./components/MasterLayout/MasterLayout";
-
 function App() {
   return (
     <>
-      <ToastContainer />
+      <Toaster />
       <div className="overlay py-5">
         <MasterLayout />
       </div>
+      
     </>
   );
 }
